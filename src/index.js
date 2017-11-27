@@ -98,7 +98,12 @@ export default class SignaturePad extends React.Component {
     this._canvas.addEventListener("mousedown", this._handleMouseDown.bind(this));
     this._canvas.addEventListener("mousemove", this._handleMouseMove.bind(this));
     document.addEventListener("mouseup", this._handleMouseUp.bind(this));
-    window.addEventListener("resize", this._resizeCanvas.bind(this));
+    if(/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ) {
+      window.addEventListener('orientationchange', this._resizeCanvas.bind(this));
+    }
+    else {
+      window.addEventListener('resize', this._resizeCanvas.bind(this));
+    }
   };
 
   _handleTouchEvents() {
